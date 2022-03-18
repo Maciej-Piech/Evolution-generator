@@ -29,5 +29,12 @@ public class World {
         out.println("System wystartował");
         run(new Enum[]{Direction.FORWARD, Direction.FORWARD, Direction.LEFT, Direction.RIGHT});
         out.println("System zakończył działanie");
+        out.println("========================");
+        Vector2d position1 = new Vector2d(1,2);
+        out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        out.println(position2);
+        out.println(position1.add(position2));
+
     }
 }
