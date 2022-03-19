@@ -41,6 +41,7 @@ public class Vector2dTest {
 
     @Test
     void itChecksUpperRight(){
+        //
         Vector2d vector2d1 = new Vector2d(2,1);
         Vector2d vector2d2 = new Vector2d(1,2);
         //
@@ -49,6 +50,7 @@ public class Vector2dTest {
 
     @Test
     void itChecksLowerLeft(){
+        //
         Vector2d vector2d1 = new Vector2d(2,1);
         Vector2d vector2d2 = new Vector2d(1,2);
         //
@@ -57,6 +59,7 @@ public class Vector2dTest {
 
     @Test
     void itChecksAdd(){
+        //
         Vector2d vector2d1 = new Vector2d(2,1);
         Vector2d vector2d2 = new Vector2d(1,2);
         //
@@ -65,6 +68,7 @@ public class Vector2dTest {
 
     @Test
     void itChecksSubtract(){
+        //
         Vector2d vector2d1 = new Vector2d(2,2);
         Vector2d vector2d2 = new Vector2d(1,1);
         //
@@ -73,6 +77,7 @@ public class Vector2dTest {
 
     @Test
     void itChecksOpposite(){
+        //
         Vector2d vector2d = new Vector2d(1,1);
         //
         assertEquals(vector2d.opposite(), new Vector2d(-1,-1));

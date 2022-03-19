@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 import uek.is.oop.MapDirection;
-
-import static java.lang.System.out;
 import static uek.is.oop.MapDirection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
