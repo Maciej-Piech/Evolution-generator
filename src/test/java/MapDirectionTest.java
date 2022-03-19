@@ -7,22 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MapDirectionTest {
     @Test
-    void itChecksNextFunction(MapDirection direction){
+    void itChecksNextFunction(){
         //
-        MapDirection mapDirection = MapDirection.valueOf(String.valueOf(direction));
+        MapDirection.next(MapDirection.NORTH);
         //
-        mapDirection.next(NORTH);
-        //
-        assertEquals(EAST,mapDirection.next(NORTH));
+        assertEquals(EAST,MapDirection.next(NORTH));
     }
     @Test
-    void itChecksPreviousFunction(MapDirection direction){
+    void itChecksPreviousFunction(){
         //
-        MapDirection mapDirection = MapDirection.valueOf(String.valueOf(direction));
+        MapDirection.previous(MapDirection.NORTH);
         //
-        mapDirection.next(NORTH);
-        //
-        assertEquals(WEST,mapDirection.next(NORTH));
+        assertEquals(EAST,MapDirection.next(NORTH));
     }
 
 }

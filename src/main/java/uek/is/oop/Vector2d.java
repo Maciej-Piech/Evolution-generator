@@ -6,7 +6,7 @@ public class Vector2d {
     public final int x;
     public final int y;
 
-    Vector2d(int x, int y) {
+    public Vector2d(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -15,12 +15,12 @@ public class Vector2d {
         return "(" + String.valueOf(x) + "," + String.valueOf(y) + ")";
     }
 
-    public boolean preccedes(Vector2d other) {
+    public boolean precedes(Vector2d other) {
         return other.x >= x && other.y >= y;
     }
 
     public boolean follows(Vector2d other) {
-        return preccedes(other) ? false : true;
+        return precedes(other) ? false : true;
     }
 
     public Vector2d upperRight(Vector2d other) {
@@ -31,7 +31,7 @@ public class Vector2d {
         return new Vector2d(maxX, maxY);
     }
 
-    public Vector2d lowerRight(Vector2d other) {
+    public Vector2d lowerLeft(Vector2d other) {
         int minX;
         int minY;
         minX = Math.min(x, other.x);
@@ -43,7 +43,7 @@ public class Vector2d {
         return new Vector2d(x + other.x, y + other.y);
     }
 
-    public Vector2d substract(Vector2d other) {
+    public Vector2d subtract(Vector2d other) {
         return new Vector2d(x - other.x, y - other.y);
     }
 

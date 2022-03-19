@@ -19,9 +19,8 @@ public enum MapDirection {
         out.println(str);
         return str;
     }
-    public MapDirection next(MapDirection direction){
-        MapDirection newDirection = MapDirection.valueOf(String.valueOf(direction));
-        MapDirection mapDirNext = switch ( direction) {
+    public static MapDirection next(MapDirection direction){
+        MapDirection mapDirNext = switch (direction) {
             case NORTH -> EAST;
             case SOUTH -> WEST;
             case WEST -> NORTH;
@@ -31,8 +30,7 @@ public enum MapDirection {
         return mapDirNext;
     }
 
-    public MapDirection previous(MapDirection direction){
-        MapDirection newDirection = MapDirection.valueOf(String.valueOf(direction));
+    public static MapDirection previous(MapDirection direction){
         MapDirection mapDirPrev = switch ( direction) {
             case NORTH -> WEST;
             case SOUTH -> EAST;
