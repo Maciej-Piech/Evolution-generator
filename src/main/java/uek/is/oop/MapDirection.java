@@ -1,5 +1,4 @@
 package uek.is.oop;
-
 import static java.lang.System.out;
 
 public enum MapDirection {

@@ -1,5 +1,4 @@
 package uek.is.oop;
-
 import java.util.Objects;
 
 public class Vector2d {
@@ -9,6 +8,17 @@ public class Vector2d {
     public Vector2d(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+    public Vector2d(){
+        x = getX();
+        y = getY();
+    }
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public String toString() {

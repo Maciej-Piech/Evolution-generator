@@ -1,5 +1,5 @@
+package uek.is.oop;
 import org.junit.jupiter.api.Test;
-import uek.is.oop.MapDirection;
 import static uek.is.oop.MapDirection.*;
 import static org.junit.jupiter.api.Assertions.*;
 

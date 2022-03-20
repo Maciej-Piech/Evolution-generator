@@ -1,6 +1,6 @@
 package uek.is.oop;
 import static java.lang.System.out;
-import java.util.Scanner;
+import static uek.is.oop.MoveDirection.*;
 
 public class World {
 
@@ -37,7 +37,25 @@ public class World {
         out.println(position1.add(position2));
         Vector2d vector2d = new Vector2d(1,1);
         //
-        out.println(vector2d.toString());
+        out.println(vector2d);
+        Animal animal1 = new Animal();
+        out.println(animal1);
+        //
+        animal1.move(RIGHT);
+        animal1.move(FORWARD);
+        animal1.move(FORWARD);
+        animal1.move(FORWARD);
+        out.println(animal1);
+        //
+        Animal animal2 = new Animal();
+        out.println("\n=========== ANIMAL 2 ===========\n");
+        out.println(animal2);
+        String[] arrayDirections = {"r","f","f"};
+        for(int i=0; i<arrayDirections.length;i++){
+            animal2.move(OptionsParser.parse(arrayDirections)[i]);
+        }
+        animal2.move(FORWARD);
+        out.println(animal2);
 
     }
 }
