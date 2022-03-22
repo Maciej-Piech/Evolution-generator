@@ -1,7 +1,5 @@
 package uek.is.oop;
-
 import org.junit.jupiter.api.Test;
-import uek.is.oop.Vector2d;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Vector2dTest {

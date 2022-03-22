@@ -2,7 +2,7 @@ package uek.is.oop;
 
 enum MoveDirection {
     FORWARD,
-    BACKWARDS,
+    BACKWARD,
     RIGHT,
     LEFT
 }

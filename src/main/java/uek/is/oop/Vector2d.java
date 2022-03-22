@@ -30,8 +30,8 @@ public class Vector2d {
     }
 
     public boolean follows(Vector2d other) {
-        return precedes(other) ? false : true;
-    }
+        return !precedes(other);
+    } //return precedes(other) ? false : true;
 
     public Vector2d upperRight(Vector2d other) {
         int maxX;

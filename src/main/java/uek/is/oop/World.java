@@ -1,4 +1,6 @@
 package uek.is.oop;
+import java.util.Arrays;
+
 import static java.lang.System.out;
 import static uek.is.oop.MoveDirection.*;
 
@@ -27,6 +29,7 @@ public class World {
     public static void main(String[] args){
 
         out.println("System wystartował");
+        /*
         run(new Enum[]{Direction.FORWARD, Direction.FORWARD, Direction.LEFT, Direction.RIGHT});
         out.println("System zakończył działanie");
         out.println("========================");
@@ -56,6 +59,17 @@ public class World {
         }
         animal2.move(FORWARD);
         out.println(animal2);
-
+        //
+        */
+        String[] test = {"f","b", "r" , "l", "f", "f", "r","r", "f", "f", "f", "f", "f","f", "f", "f"};
+        //String[] test = {"r","l"};
+        MoveDirection[] directions = OptionsParser.parse(test);
+        out.println(Arrays.toString(directions));
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        out.println(map);
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        out.println(map);
     }
 }
