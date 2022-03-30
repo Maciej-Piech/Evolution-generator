@@ -26,11 +26,11 @@ public class Vector2d {
     }
 
     public boolean precedes(Vector2d other) {
-        return other.x >= x && other.y >= y;
+        return other.x >= this.x && other.y >= this.y;
     }
 
     public boolean follows(Vector2d other) {
-        return !precedes(other);
+        return other.x <= this.x && other.y <= this.y;
     } //return precedes(other) ? false : true;
 
     public Vector2d upperRight(Vector2d other) {

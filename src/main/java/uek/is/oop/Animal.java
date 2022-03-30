@@ -21,7 +21,7 @@ public class Animal {
     }
 
     public Vector2d getPosition(){
-        return position;
+        return this.position;
     }
     public boolean isAt(Vector2d position){
         return position.equals(this.position);
@@ -81,12 +81,6 @@ public class Animal {
         position = new Vector2d(2,2);
     }
 
-    Animal(IWorldMap map){
-        orientation = NORTH;
-        position = new Vector2d(2,2);
-        this.map=map;
-
-    }
 
     Animal(IWorldMap map, Vector2d initialPosition){
         this.orientation = NORTH;
