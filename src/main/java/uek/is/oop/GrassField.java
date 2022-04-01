@@ -4,7 +4,7 @@ import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
 
-    protected List<Grass> grassBlocks = new ArrayList<>();
+    protected Map<Vector2d, Grass> allGrasses = new HashMap();
 
     public GrassField( int numberOfGrassBlocks){
         int maxSize = (int)Math.sqrt(10* numberOfGrassBlocks);
@@ -19,38 +19,44 @@ public class GrassField extends AbstractWorldMap{
             grassSet.add(random.nextInt((maxSize+1)*(maxSize+1)));
         }
         for(Integer i : grassSet){
-            grassBlocks.add(new Grass(new Vector2d(i % (maxSize+1), i / (maxSize+1))));
+            Vector2d grassPosition= (new Vector2d(i % (maxSize+1), i / (maxSize+1)));
+            allGrasses.put(grassPosition, new Grass(grassPosition));
         }
 
     }
 
     @Override
     public Object objectAt(Vector2d checkedPosition) {
-        Object object = super.objectAt(checkedPosition);
-        if ( object != null ){
-            return object;
+        if (allAnimals.containsKey(checkedPosition)) {
+            return allAnimals.get(checkedPosition);
         }
-        for(Grass grassElement: grassBlocks){
-            if(grassElement.getPosition().equals(checkedPosition)){
-                return grassElement;
-            }
-        }
-        return null;
+        return allGrasses.get(checkedPosition);
     }
 
     @Override
     public String toString(){
-        this.topRight=this.allAnimals.get(0).getPosition();
-        this.bottomLeft=this.allAnimals.get(0).getPosition();
 
-        for(Animal animal: allAnimals){
-            this.topRight=this.topRight.upperRight(animal.getPosition());
-            this.bottomLeft=this.bottomLeft.lowerLeft(animal.getPosition());
+
+//        Vector2d firstVector = allAnimals.keySet().iterator().next();
+//        this.topRight= firstVector;
+//        this.bottomLeft= firstVector;
+
+        for (Vector2d key: allAnimals.keySet()) {
+            this.topRight= key;
+            this.bottomLeft= key;
         }
-        for(Grass grassElement: grassBlocks){
-            this.topRight=this.topRight.upperRight(grassElement.getPosition());
-            this.bottomLeft=this.bottomLeft.lowerLeft(grassElement.getPosition());
-        }
+
+        allAnimals.keySet()
+                .forEach(position -> {
+                    this.topRight=this.topRight.upperRight(position);
+                    this.bottomLeft=this.bottomLeft.lowerLeft(position);
+                });
+        allGrasses.keySet()
+                .forEach(position -> {
+                    this.topRight=this.topRight.upperRight(position);
+                    this.bottomLeft=this.bottomLeft.lowerLeft(position);
+                });
+
         return super.toString();
 
     }

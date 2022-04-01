@@ -1,4 +1,7 @@
 package uek.is.oop;
+
+import java.util.*;
+
 import static java.lang.System.out;
 import static uek.is.oop.MapDirection.*;
 
@@ -7,85 +10,104 @@ public class Animal {
     private Vector2d position;
     private IWorldMap map;
 
+    private final List<IPositionChangeObserver> allObservers = new LinkedList<IPositionChangeObserver>();
+
     @Override
-    public String toString(){
-        String symbol ="";
-        switch(orientation){
-            case NORTH ->  symbol = "N";
+    public String toString() {
+        String symbol = "";
+        switch (orientation) {
+            case NORTH -> symbol = "N";
             case EAST -> symbol = "E";
-            case SOUTH ->  symbol ="S";
+            case SOUTH -> symbol = "S";
             case WEST -> symbol = "W";
         }
+        return symbol;
 
-        return "orientation: "+ symbol +", position: "+ this.position;
+//        return "orientation: " + symbol + ", position: " + this.position;
     }
 
-    public Vector2d getPosition(){
+    public Vector2d getPosition() {
         return this.position;
     }
-    public boolean isAt(Vector2d position){
+
+    public boolean isAt(Vector2d position) {
         return position.equals(this.position);
     }
 
-    public boolean moveCheckerForward(Vector2d position){
+    public boolean moveCheckerForward(Vector2d position) {
 
-        if(position.add(this.orientation.toUnitVector(this.orientation)).getX()>map.getMapWidth() ||
-                position.add(this.orientation.toUnitVector(this.orientation)).getY()>map.getMapHeight() ||
-                position.add(this.orientation.toUnitVector(this.orientation)).getX()<0 ||
-                position.add(this.orientation.toUnitVector(this.orientation)).getY()<0)
-        { out.println("Zwierze nie może wyjść poza mape");
-        return false;}
-        return true;
+        if (position.add(this.orientation.toUnitVector(this.orientation)).getX() > map.getMapWidth() ||
+                position.add(this.orientation.toUnitVector(this.orientation)).getY() > map.getMapHeight() ||
+                position.add(this.orientation.toUnitVector(this.orientation)).getX() < 0 ||
+                position.add(this.orientation.toUnitVector(this.orientation)).getY() < 0) {
+            out.println("Zwierze nie może wyjść poza mape");
+            return false;
         }
-
-    public boolean moveCheckerBackward(Vector2d position){
-
-        if(position.subtract(this.orientation.toUnitVector(this.orientation)).getX()> map.getMapWidth() ||
-                position.subtract(this.orientation.toUnitVector(this.orientation)).getY()> map.getMapHeight() ||
-                position.subtract(this.orientation.toUnitVector(this.orientation)).getX()<0 ||
-                position.subtract(this.orientation.toUnitVector(this.orientation)).getY()<0)
-        { out.println("Zwierze nie moze wyjsc poza mape");
-        return false;}
         return true;
     }
 
-    public void move( MoveDirection direction) {
+    public boolean moveCheckerBackward(Vector2d position) {
+
+        if (position.subtract(this.orientation.toUnitVector(this.orientation)).getX() > map.getMapWidth() ||
+                position.subtract(this.orientation.toUnitVector(this.orientation)).getY() > map.getMapHeight() ||
+                position.subtract(this.orientation.toUnitVector(this.orientation)).getX() < 0 ||
+                position.subtract(this.orientation.toUnitVector(this.orientation)).getY() < 0) {
+            out.println("Zwierze nie moze wyjsc poza mape");
+            return false;
+        }
+        return true;
+    }
+
+    public void move(MoveDirection direction) {
         switch (direction) {
             case RIGHT -> orientation = next(this.orientation);
             case LEFT -> orientation = previous(this.orientation);
             case FORWARD -> {
                 if (moveCheckerForward(position)) {
-                    if (this.map.canMoveTo(this.position.add(this.orientation.toUnitVector(this.orientation))))
-                    // ^ it checks if animal can move to next position
-                    {
-                        this.position = this.position.add(this.orientation.toUnitVector(this.orientation));
-                    }
+                    Vector2d newPositionForward = this.position.add(this.orientation.toUnitVector(this.orientation));
+                    this.positionChanged(newPositionForward);
                 }
             }
             case BACKWARD -> {
                 if (moveCheckerBackward(position)) {
-                    {
-                        if (this.map.canMoveTo(this.position.subtract(this.orientation.toUnitVector(this.orientation))))
-                        // ^ it checks if animal can move to next position
-                        {
-                            this.position = this.position.subtract(this.orientation.toUnitVector(this.orientation));
-                        }
+                    Vector2d newPositionBackward = this.position.subtract(this.orientation.toUnitVector(this.orientation));
+                    this.positionChanged(newPositionBackward);
                     }
                 }
             }
         }
+
+    void addObserver(IPositionChangeObserver observer) {
+        this.allObservers.add(observer);
     }
 
-    Animal(){
+    void removeObserver(IPositionChangeObserver observer) {
+        this.allObservers.remove(observer);
+    }
+
+    void positionChanged(Vector2d newPosition) {
+        if (this.map.canMoveTo(newPosition)) {
+            Vector2d oldPosition = this.position;
+            this.position = newPosition;
+            for (IPositionChangeObserver observer : allObservers) {
+                observer.positionChanged(oldPosition, newPosition);
+            }
+
+        }
+        else out.println("Position is currently occupied.");
+
+    }
+
+    Animal() {
         orientation = NORTH;
-        position = new Vector2d(2,2);
+        position = new Vector2d(2, 2);
     }
 
 
-    Animal(IWorldMap map, Vector2d initialPosition){
+    Animal(IWorldMap map, Vector2d initialPosition) {
         this.orientation = NORTH;
         this.position = initialPosition;
-        this.map=map;
+        this.map = map;
 
     }
 }

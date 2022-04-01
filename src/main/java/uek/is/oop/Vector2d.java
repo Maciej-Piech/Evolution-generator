@@ -62,12 +62,12 @@ public class Vector2d {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vector2d vector2d = (Vector2d) o;
-        return x == vector2d.x && y == vector2d.y;
+        return this.x == vector2d.x && this.y == vector2d.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.x, this.y);
     }
 
     public Vector2d opposite() {
