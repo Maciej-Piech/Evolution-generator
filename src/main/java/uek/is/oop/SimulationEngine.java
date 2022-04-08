@@ -2,7 +2,7 @@ package uek.is.oop;
 
 import java.util.ArrayList;
 
-public class SimulationEngine implements IEngine{
+public class SimulationEngine implements IEngine {
 
     MoveDirection[] moveDirections;
     IWorldMap worldMapInstance;
@@ -23,18 +23,14 @@ public class SimulationEngine implements IEngine{
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         int animalNumber = allAnimals.size();
         int animalIterator = 0;
         for (MoveDirection moveDirection : moveDirections) {
-            /* if (animalNumber <= animalIterator) {
-                animalIterator = 0;
-            }*/
             allAnimals.get(animalIterator).move(moveDirection);
-            animalIterator= (animalIterator + 1) % animalNumber;
+            animalIterator = (animalIterator + 1) % animalNumber;
         }
-        }
-
     }
+
+}
 

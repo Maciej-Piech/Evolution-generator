@@ -1,4 +1,5 @@
 package uek.is.oop;
+
 import java.util.Objects;
 
 public class Vector2d {
@@ -9,10 +10,12 @@ public class Vector2d {
         this.x = x;
         this.y = y;
     }
-    public Vector2d(){
+
+    public Vector2d() {
         x = getX();
         y = getY();
     }
+
     public int getX() {
         return x;
     }
@@ -31,7 +34,7 @@ public class Vector2d {
 
     public boolean follows(Vector2d other) {
         return other.x <= this.x && other.y <= this.y;
-    } //return precedes(other) ? false : true;
+    } //return precedes(other) ? false : true; <-- it works too
 
     public Vector2d upperRight(Vector2d other) {
         int maxX;
@@ -76,4 +79,15 @@ public class Vector2d {
         return new Vector2d(xReversed, yReversed);
     }
 
+    public int compareByX(Vector2d other) {
+        if (this.x > other.x) return 1;
+        else if (this.x < other.x) return -1;
+        else return 0;
+    }
+
+    public int compareByY(Vector2d other) {
+        if (this.y > other.y) return 1;
+        else if (this.y < other.y) return -1;
+        else return 0;
+    }
 }

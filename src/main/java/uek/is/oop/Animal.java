@@ -22,8 +22,6 @@ public class Animal {
             case WEST -> symbol = "W";
         }
         return symbol;
-
-//        return "orientation: " + symbol + ", position: " + this.position;
     }
 
     public Vector2d getPosition() {
@@ -72,10 +70,10 @@ public class Animal {
                 if (moveCheckerBackward(position)) {
                     Vector2d newPositionBackward = this.position.subtract(this.orientation.toUnitVector(this.orientation));
                     this.positionChanged(newPositionBackward);
-                    }
                 }
             }
         }
+    }
 
     void addObserver(IPositionChangeObserver observer) {
         this.allObservers.add(observer);
@@ -93,8 +91,7 @@ public class Animal {
                 observer.positionChanged(oldPosition, newPosition);
             }
 
-        }
-        else out.println("Position is currently occupied.");
+        } else out.println("Position is currently occupied.");
 
     }
 

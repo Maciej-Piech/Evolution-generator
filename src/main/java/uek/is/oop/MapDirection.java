@@ -1,4 +1,5 @@
 package uek.is.oop;
+
 import static java.lang.System.out;
 
 public enum MapDirection {
@@ -7,9 +8,9 @@ public enum MapDirection {
     WEST,
     EAST;
 
-    public String toString(MapDirection direction){
+    public String toString(MapDirection direction) {
         MapDirection newDirection = MapDirection.valueOf(String.valueOf(direction));
-        String str = switch ( direction) {
+        String str = switch (direction) {
             case NORTH -> "Północ";
             case SOUTH -> "Południe";
             case WEST -> "Zachód";
@@ -18,7 +19,8 @@ public enum MapDirection {
         out.println(str);
         return str;
     }
-    public static MapDirection next(MapDirection direction){
+
+    public static MapDirection next(MapDirection direction) {
         MapDirection mapDirNext = switch (direction) {
             case NORTH -> EAST;
             case SOUTH -> WEST;
@@ -29,8 +31,8 @@ public enum MapDirection {
         return mapDirNext;
     }
 
-    public static MapDirection previous(MapDirection direction){
-        MapDirection mapDirPrev = switch ( direction) {
+    public static MapDirection previous(MapDirection direction) {
+        MapDirection mapDirPrev = switch (direction) {
             case NORTH -> WEST;
             case SOUTH -> EAST;
             case WEST -> SOUTH;
@@ -40,15 +42,15 @@ public enum MapDirection {
         return mapDirPrev;
     }
 
-    public Vector2d toUnitVector(MapDirection direction){
+    public Vector2d toUnitVector(MapDirection direction) {
         MapDirection newDirection = MapDirection.valueOf(String.valueOf(direction));
-        Vector2d unitVect = switch ( direction) {
-            case NORTH -> new Vector2d(0,1);
-            case SOUTH -> new  Vector2d(0,-1);
-            case WEST -> new Vector2d(-1,0);
-            case EAST -> new Vector2d(1,0);
+        Vector2d unitVect = switch (direction) {
+            case NORTH -> new Vector2d(0, 1);
+            case SOUTH -> new Vector2d(0, -1);
+            case WEST -> new Vector2d(-1, 0);
+            case EAST -> new Vector2d(1, 0);
         };
-        out.println("Vector: "+ unitVect);
+        out.println("Vector: " + unitVect);
         return unitVect;
     }
 }

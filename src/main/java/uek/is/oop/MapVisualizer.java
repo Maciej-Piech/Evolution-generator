@@ -8,6 +8,7 @@ public class MapVisualizer {
 
     /**
      * Initializes the MapVisualizer with an instance of map to visualize.
+     *
      * @param map
      */
     public MapVisualizer(IWorldMap map) {
@@ -67,7 +68,7 @@ public class MapVisualizer {
         String result = null;
         if (this.map.isOccupied(currentPosition)) {
             Object object = this.map.objectAt(currentPosition);
-            System.out.println("Object is"+object);
+            System.out.println("Object is" + object);
             if (object != null) {
                 result = object.toString();
             } else {

@@ -3,7 +3,6 @@ package uek.is.oop;
 import java.util.Arrays;
 
 import static java.lang.System.out;
-import static uek.is.oop.MoveDirection.*;
 
 public class World {
 
@@ -29,46 +28,19 @@ public class World {
     public static void main(String[] args) {
 
         out.println("System wystartował");
-        /*
-        run(new Enum[]{Direction.FORWARD, Direction.FORWARD, Direction.LEFT, Direction.RIGHT});
-        out.println("System zakończył działanie");
-        out.println("========================");
-        Vector2d position1 = new Vector2d(1,2);
-        out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        out.println(position2);
-        out.println(position1.add(position2));
-        Vector2d vector2d = new Vector2d(1,1);
-        //
-        out.println(vector2d);
-        Animal animal1 = new Animal();
-        out.println(animal1);
-        //
-        animal1.move(RIGHT);
-        animal1.move(FORWARD);
-        animal1.move(FORWARD);
-        animal1.move(FORWARD);
-        out.println(animal1);
-        //
-        Animal animal2 = new Animal();
-        out.println("\n=========== ANIMAL 2 ===========\n");
-        out.println(animal2);
-        String[] arrayDirections = {"r","f","f"};
-        for(int i=0; i<arrayDirections.length;i++){
-            animal2.move(OptionsParser.parse(arrayDirections)[i]);
+
+        try {
+            //String[] test = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+            String[] test = {"r", "l"};
+            MoveDirection[] directions = OptionsParser.parse(test);
+            out.println(Arrays.toString(directions));
+            IWorldMap map = new GrassField(8);
+            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
+            IEngine engine = new SimulationEngine(directions, map, positions);
+            engine.run();
+            out.println(map);
+        } catch (IllegalArgumentException ex) {
+            out.println(ex.getMessage());
         }
-        animal2.move(FORWARD);
-        out.println(animal2);
-        //
-        */
-        //String[] test = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
-        String[] test = {"r","l"};
-        MoveDirection[] directions = OptionsParser.parse(test);
-        out.println(Arrays.toString(directions));
-        IWorldMap map = new GrassField(8);
-        Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
-        out.println(map);
     }
 }
